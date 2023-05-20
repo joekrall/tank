@@ -14,11 +14,11 @@
       - install
       - core
   tasks:
-    - include: tasks/git-setup.yml
     - include: tasks/dotfiles.yml
-    - include: tasks/core-setup.yml
+    - include: tasks/core.yml
     - include: tasks/node.yml
-    - include: tasks/npm-packages.yml
     - include: tasks/zsh.yml
     - include: tasks/nvim.yml
+    - include: tasks/productivity.yml
+
 
