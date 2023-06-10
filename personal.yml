@@ -2,7 +2,6 @@
   vars:
     source_key: "./.ssh/id_rsa"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
-    personal: "{{ lookup('env', 'HOME') }}/personal"
   pre_tasks:
   - name: Update Apt
     become: true
@@ -14,10 +13,10 @@
       - install
       - core
   tasks:
-    - include: tasks/dotfiles.yml
-    - include: tasks/core.yml
-    - include: tasks/node.yml
-    - include: tasks/zsh.yml
+    - import_tasks: tasks/dotfiles.yml
+    - import_tasks: tasks/core.yml
+    - import_tasks: tasks/zsh.yml
+    - import_tasks: tasks/node.yml
     - include: tasks/nvim.yml
     - include: tasks/productivity.yml
 

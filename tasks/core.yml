@@ -1,25 +1,16 @@
 - name: Install System Packages 1 (build-essential)
   become: true
   apt:
-    name: ["build-essential"]
+    name: ["build-essential", "make"]
   tags:
     - install
-    - neovim
     - core
 
 - name: Install System Packages 2 (Neovim build prerequisites)
   become: true
   apt:
-    name: ["clang", "gcc", "ninja-build", "gettext", "cmake", "unzip", "curl"]
+    name: ["clang", "gcc", "ninja-build", "gettext", "cmake", "unzip", "curl", "ripgrep"]
   tags:
     - install
     - neovim
-    - core
-
-- name: Install System Packages 3 (the rest)
-  become: true
-  apt:
-    name: ["htop", "tree", "make"]
-  tags:
-    - install
     - core

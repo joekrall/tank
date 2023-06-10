@@ -1,4 +1,4 @@
-- name: Remove neovim
+- name: Remove Neovim
   shell: rm -rf ~/neovim
   tags:
     - install
@@ -20,8 +20,8 @@
     - install
     - neovim
 
-- name: Build neovim
-  shell: "cd {{ lookup('env', 'HOME') }}/neovim && CMAKE_BUILD_TYPE=RelWithDebInfo"
+- name: Build Neovim
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && git checkout stable && CMAKE_BUILD_TYPE=RelWithDebInfo"
   tags:
     - install
     - neovim

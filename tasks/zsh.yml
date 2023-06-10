@@ -1,10 +1,17 @@
 - name: Install zsh 
   apt: name=zsh
   tags: &tags_for_zsh_tasks [ 'install', 'productivity', 'dotfiles', 'zsh' ]
-    
+
+- name: Check that the .oh-my-zsh folder exists
+  stat:
+    path: /home/joe/.oh-my-zsh
+  register: oh_my_stats
+  tags: *tags_for_zsh_tasks    
+
 - name: Oh-My-Zsh
-  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  shell: curl -L https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer --keep-zshrc
   tags: *tags_for_zsh_tasks
+  when: oh_my_stats.stat.exists == False
   become_user: joe
 
 - name: Install zsh-autosuggestions
