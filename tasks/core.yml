@@ -1,4 +1,4 @@
-- name: Install System Packages 1 (build-essential)
+- name: Install Core Packages 1 (build-essential and make)
   become: true
   apt:
     name: ["build-essential", "make"]
@@ -6,7 +6,7 @@
     - install
     - core
 
-- name: Install System Packages 2 (Neovim build prerequisites)
+- name: Install Core Packages 2 (Neovim build prerequisites)
   become: true
   apt:
     name: ["clang", "gcc", "ninja-build", "gettext", "cmake", "unzip", "curl", "ripgrep"]
@@ -14,3 +14,11 @@
     - install
     - neovim
     - core
+
+- name: Install Core Packages 3 (go)
+  become: true
+  apt:
+    name: ["golang-go"]
+  tags:
+    - install
+    - go
