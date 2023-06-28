@@ -17,7 +17,7 @@
     - import_tasks: tasks/core.yml
     - import_tasks: tasks/zsh.yml
     - import_tasks: tasks/node.yml
-    - include: tasks/nvim.yml
-    - include: tasks/productivity.yml
+    - import_tasks: tasks/nvim.yml
+    - import_tasks: tasks/productivity.yml
 
 
