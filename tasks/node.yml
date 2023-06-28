@@ -13,3 +13,9 @@
 - name: Install correct version of Node
   shell: n 18
   tags: *tags_for_n_tasks
+
+- name: Enable Yarn 
+  shell: corepack enable 
+  tags:
+    - install
+    - yarn
