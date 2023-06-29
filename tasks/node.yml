@@ -4,8 +4,14 @@
   register: n_stats
   tags: &tags_for_n_tasks [ 'install', 'node', 'npm', 'n' ]
 
+- name: Download n-install script
+  shell: curl -L https://raw.githubusercontent.com/mklement0/n-install/stable/bin/n-install > ~/.n-install && chmod +x ~/.n-install
+  tags: *tags_for_n_tasks
+  when: n_stats.stat.exists == False
+  become_user: joe
+
 - name: Install n with n-install
-  shell: curl -L https://raw.githubusercontent.com/mklement0/n-install/stable/bin/n-install > ~/.n-install && chmod +x ~/.n-install && N_PREFIX=~/.local/n ~/.n-install -y
+  shell: N_PREFIX=~/.local/n --norc --noprofile -i ~/.n-install -y
   tags: *tags_for_n_tasks
   when: n_stats.stat.exists == False
   become_user: joe
