@@ -11,7 +11,7 @@
   become_user: joe
 
 - name: Install n with n-install
-  shell: ~/.n-install -q -n
+  shell: N_PREFIX=~/.local/n ~/.n-install -q -n
   tags: *tags_for_n_tasks
   when: n_stats.stat.exists == False
   become_user: joe
