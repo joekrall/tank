@@ -3,9 +3,11 @@
   apt: name=zsh
   tags: &tags_for_zsh_tasks [ 'install', 'productivity', 'dotfiles', 'zsh' ]
 
-- name: Change shell to zsh
+- name: Change shell to zsh for joe
   become: true
-  shell: chsh -s $(which zsh)
+  ansible.builtin.user:
+    name: joe
+    shell: /usr/bin/zsh
   tags: *tags_for_zsh_tasks
 
 - name: Check that the .oh-my-zsh folder exists

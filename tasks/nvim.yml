@@ -1,5 +1,8 @@
 - name: Remove Neovim
-  shell: rm -rf ~/neovim
+  become: true
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/neovim"
+    state: absent
   tags:
     - install
     - neovim
@@ -16,19 +19,25 @@
   ansible.builtin.git:
     repo: 'https://github.com/neovim/neovim.git'
     dest: "{{ lookup('env', 'HOME') }}/neovim"
+    version: stable
+    update: false
   tags:
     - install
     - neovim
 
 - name: Build Neovim
-  shell: "cd {{ lookup('env', 'HOME') }}/neovim && git checkout stable && CMAKE_BUILD_TYPE=RelWithDebInfo"
+  ansible.builtin.shell:
+    cmd: "make CMAKE_BUILD_TYPE=RelWithDebInfo"
+    chdir: "{{ lookup('env', 'HOME') }}/neovim"
   tags:
     - install
     - neovim
 
-- name: Install neovim
+- name: Install Neovim
   become: true
-  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"
+  ansible.builtin.shell:
+    cmd: "make install"
+    chdir: "{{ lookup('env', 'HOME') }}/neovim"
   tags:
     - install
     - neovim
